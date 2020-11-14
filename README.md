@@ -44,7 +44,7 @@ Will get a random card from the list, but will exclude the number N.
 !tarot -N,-N2,-N3
 ```
 (example: `!tarot -4,-6,-56`) <br>
-Will get a random card from the list, but will exclude the commaspaced numbers. (no spaces between commaspaced values, otherwise the results could be unpredictable, recorded as #1)
+Will get a random card from the list, but will exclude the commaspaced numbers. (no spaces between commaspaced values, otherwise the results could be unpredictable, recorded as discord-oracle#1)
 
 
 # notes
