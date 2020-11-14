@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+import dice
+import discord
+from discord.ext import commands
+import logging
+import random
+from env import TOKEN,CHANNEL,BASEURL,EXT
+
+# setup discord.py
+client = discord.Client()
+# setup logging
+logger = logging.getLogger('oracle')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='oracle.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
+
+def roll_dice(notation):
+    roll = dice.roll(notation)
+    result = int(roll)
+    return roll,result
+
+def random_tarot(exclude):
+    if exclude == '':
+        random_card = str(random.choice(range(00, 77, 1)))
+        return (BASEURL + random_card.zfill(2) + EXT)
+    elif exclude is not None:
+        excludelist = exclude.split(',')
+        include = []
+        exclude = []
+        for i in excludelist:
+            if int(i) >= 0:
+                include.append(i)
+            elif int(i) < 0:
+                exclude.append(i)
+        if include:
+            specific_card = include[0]
+            return (BASEURL + specific_card.zfill(2) + EXT)
+        elif exclude:
+            random_card = str(random.choice([i for i in (range(00, 77, 1)) if not i in exclude]))
+            return (BASEURL + random_card.zfill(2) + EXT)
+ 
+@client.event
+async def on_message(message):
+    # we do not want the bot to reply to itself
+    if message.author == client.user:
+        return
+    if message.content.startswith('!hello'):
+        msg = 'Hello {0.author.mention}'.format(message)
+        await message.channel.send (msg)
+    if message.content.startswith('!roll'):
+        parameters = message.content.split(' ', 1)
+        if len(parameters) == 2:
+            param = parameters[1]
+            roll,result = roll_dice(param)
+            msg = 'Rolling %s for {0.author.mention}: `%s`'.format(message) % (param,roll)
+            await message.channel.send (msg)
+    if message.content.startswith('!tarot'):
+        channel = client.get_channel(int(CHANNEL))
+        parameters = message.content.split(' ', 1)
+        del parameters[0]
+        if not parameters:
+            exclude = ''
+        elif parameters:
+            exclude = parameters[0]
+        image_url = random_tarot(exclude)
+        msg = '%s'.format(message) % (image_url)
+        await channel.send (msg)  
+  
+@client.event
+async def on_ready():
+    print('### Active with id %s as %s  ###' % (client.user.id,client.user.name) )
+    activity = discord.Activity(name='the threads of fate', type=discord.ActivityType.watching)
+    await client.change_presence(activity=activity)
+    
+if __name__ == '__main__':
+    client.run(TOKEN)
