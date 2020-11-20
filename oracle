@@ -2,12 +2,14 @@
 import dice
 import discord
 from discord.ext import commands
+import discord
 import logging
 import random
-from env import TOKEN,CHANNEL,BASEURL,EXT
+from env import TOKEN,CHANNEL_ROLL,CHANNEL_TAROT,TAROT_USERS,BASEURL,EXT
 
 # setup discord.py
 client = discord.Client()
+e = discord.Embed()
 # setup logging
 logger = logging.getLogger('oracle')
 logger.setLevel(logging.DEBUG)
@@ -40,37 +42,48 @@ def random_tarot(exclude):
             random_card = str(random.choice([i for i in (range(00, 77, 1)) if not i in exclude]))
             return (BASEURL + random_card.zfill(2) + EXT)
  
+def help_text():
+    file = open('usage.md', 'r')
+    contents = file.read()
+    return (contents)
+
 @client.event
 async def on_message(message):
     # we do not want the bot to reply to itself
     if message.author == client.user:
         return
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await message.channel.send (msg)
+    if message.content.startswith('!help'):
+        msg = format(help_text())
+        await message.author.send (msg)
     if message.content.startswith('!roll'):
+        channel = client.get_channel(int(CHANNEL_ROLL))
         parameters = message.content.split(' ', 1)
         if len(parameters) == 2:
             param = parameters[1]
             roll,result = roll_dice(param)
             msg = 'Rolling %s for {0.author.mention}: `%s`'.format(message) % (param,roll)
-            await message.channel.send (msg)
+            await channel.send (msg)
     if message.content.startswith('!tarot'):
-        channel = client.get_channel(int(CHANNEL))
+        channel = client.get_channel(int(CHANNEL_TAROT))
         parameters = message.content.split(' ', 1)
         del parameters[0]
-        if not parameters:
-            exclude = ''
-        elif parameters:
-            exclude = parameters[0]
-        image_url = random_tarot(exclude)
-        msg = '%s'.format(message) % (image_url)
-        await channel.send (msg)  
-  
+        allowed_users = TAROT_USERS
+        if str(message.author.id) in allowed_users:
+            if not parameters:
+                exclude = ''
+            elif parameters:
+                exclude = parameters[0]
+            image_url = random_tarot(exclude)
+            embed = e.set_image(url=image_url)
+            await channel.send (embed=embed)
+        else:
+            msg = format('You do not have the Sight')
+            await message.author.send (msg)
+         
 @client.event
 async def on_ready():
     print('### Active with id %s as %s  ###' % (client.user.id,client.user.name) )
-    activity = discord.Activity(name='the threads of fate', type=discord.ActivityType.watching)
+    activity = discord.Activity(name='the threads of fate (pm !help for help)', type=discord.ActivityType.watching)
     await client.change_presence(activity=activity)
     
 if __name__ == '__main__':
