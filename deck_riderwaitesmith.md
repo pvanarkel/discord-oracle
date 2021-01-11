@@ -1,0 +1,80 @@
+# List of Rider Waite Smith cards
+
+- [00](https://cdn.hippogrief.nl/riderwaitesmith/00.jpg) : The Fool
+- [01](https://cdn.hippogrief.nl/riderwaitesmith/01.jpg) : The Magician
+- [02](https://cdn.hippogrief.nl/riderwaitesmith/02.jpg) : The High Priestess
+- [03](https://cdn.hippogrief.nl/riderwaitesmith/03.jpg) : The Empress
+- [04](https://cdn.hippogrief.nl/riderwaitesmith/04.jpg) : The Emperor
+- [05](https://cdn.hippogrief.nl/riderwaitesmith/05.jpg) : The Hierophant
+- [06](https://cdn.hippogrief.nl/riderwaitesmith/06.jpg) : The Lovers
+- [07](https://cdn.hippogrief.nl/riderwaitesmith/07.jpg) : The Chariot
+- [08](https://cdn.hippogrief.nl/riderwaitesmith/08.jpg) : The Strength
+- [09](https://cdn.hippogrief.nl/riderwaitesmith/09.jpg) : The Hermit
+- [10](https://cdn.hippogrief.nl/riderwaitesmith/10.jpg) : Wheel of Fortune
+- [11](https://cdn.hippogrief.nl/riderwaitesmith/11.jpg) : Justice
+- [12](https://cdn.hippogrief.nl/riderwaitesmith/12.jpg) : The Hanged Man
+- [13](https://cdn.hippogrief.nl/riderwaitesmith/13.jpg) : Death
+- [14](https://cdn.hippogrief.nl/riderwaitesmith/14.jpg) : Temperance
+- [15](https://cdn.hippogrief.nl/riderwaitesmith/15.jpg) : The Devil
+- [16](https://cdn.hippogrief.nl/riderwaitesmith/16.jpg) : The Tower
+- [17](https://cdn.hippogrief.nl/riderwaitesmith/17.jpg) : The Star
+- [18](https://cdn.hippogrief.nl/riderwaitesmith/18.jpg) : The Moon
+- [19](https://cdn.hippogrief.nl/riderwaitesmith/19.jpg) : The Sun
+- [20](https://cdn.hippogrief.nl/riderwaitesmith/20.jpg) : Judgement
+- [21](https://cdn.hippogrief.nl/riderwaitesmith/21.jpg) : The World
+- [22](https://cdn.hippogrief.nl/riderwaitesmith/22.jpg) : Ace of Cups
+- [23](https://cdn.hippogrief.nl/riderwaitesmith/23.jpg) : 2 of Cups
+- [24](https://cdn.hippogrief.nl/riderwaitesmith/24.jpg) : 3 of Cups
+- [25](https://cdn.hippogrief.nl/riderwaitesmith/25.jpg) : 4 of Cups
+- [26](https://cdn.hippogrief.nl/riderwaitesmith/26.jpg) : 5 of Cups
+- [27](https://cdn.hippogrief.nl/riderwaitesmith/27.jpg) : 6 of Cups
+- [28](https://cdn.hippogrief.nl/riderwaitesmith/28.jpg) : 7 of Cups
+- [29](https://cdn.hippogrief.nl/riderwaitesmith/29.jpg) : 8 of Cups
+- [30](https://cdn.hippogrief.nl/riderwaitesmith/30.jpg) : 9 of Cups
+- [31](https://cdn.hippogrief.nl/riderwaitesmith/31.jpg) : 10 of Cups
+- [32](https://cdn.hippogrief.nl/riderwaitesmith/32.jpg) : Page of Cups
+- [33](https://cdn.hippogrief.nl/riderwaitesmith/33.jpg) : Knight of Cups
+- [34](https://cdn.hippogrief.nl/riderwaitesmith/34.jpg) : Queen of Cups
+- [35](https://cdn.hippogrief.nl/riderwaitesmith/35.jpg) : King of Cups
+- [36](https://cdn.hippogrief.nl/riderwaitesmith/36.jpg) : Ace of Pentacles
+- [37](https://cdn.hippogrief.nl/riderwaitesmith/37.jpg) : 2 of Pentacles
+- [38](https://cdn.hippogrief.nl/riderwaitesmith/38.jpg) : 3 of Pentacles
+- [39](https://cdn.hippogrief.nl/riderwaitesmith/39.jpg) : 4 of Pentacles
+- [40](https://cdn.hippogrief.nl/riderwaitesmith/40.jpg) : 5 of Pentacles
+- [41](https://cdn.hippogrief.nl/riderwaitesmith/41.jpg) : 6 of Pentacles
+- [42](https://cdn.hippogrief.nl/riderwaitesmith/42.jpg) : 7 of Pentacles
+- [43](https://cdn.hippogrief.nl/riderwaitesmith/43.jpg) : 8 of Pentacles
+- [44](https://cdn.hippogrief.nl/riderwaitesmith/44.jpg) : 9 of Pentacles
+- [45](https://cdn.hippogrief.nl/riderwaitesmith/45.jpg) : 10 of Pentacles
+- [46](https://cdn.hippogrief.nl/riderwaitesmith/46.jpg) : Page of Pentacles
+- [47](https://cdn.hippogrief.nl/riderwaitesmith/47.jpg) : Knight of Pentacles
+- [48](https://cdn.hippogrief.nl/riderwaitesmith/48.jpg) : Queen of Pentacles
+- [49](https://cdn.hippogrief.nl/riderwaitesmith/49.jpg) : King of Pentacles
+- [50](https://cdn.hippogrief.nl/riderwaitesmith/50.jpg) : Ace of Swords
+- [51](https://cdn.hippogrief.nl/riderwaitesmith/51.jpg) : 2 of Swords
+- [52](https://cdn.hippogrief.nl/riderwaitesmith/52.jpg) : 3 of Swords
+- [53](https://cdn.hippogrief.nl/riderwaitesmith/53.jpg) : 4 of Swords
+- [54](https://cdn.hippogrief.nl/riderwaitesmith/54.jpg) : 5 of Swords
+- [55](https://cdn.hippogrief.nl/riderwaitesmith/55.jpg) : 6 of Swords
+- [56](https://cdn.hippogrief.nl/riderwaitesmith/56.jpg) : 7 of Swords
+- [57](https://cdn.hippogrief.nl/riderwaitesmith/57.jpg) : 8 of Swords
+- [58](https://cdn.hippogrief.nl/riderwaitesmith/58.jpg) : 9 of Swords
+- [59](https://cdn.hippogrief.nl/riderwaitesmith/59.jpg) : 10 of Swords
+- [60](https://cdn.hippogrief.nl/riderwaitesmith/60.jpg) : Page of Swords
+- [61](https://cdn.hippogrief.nl/riderwaitesmith/61.jpg) : Knight of Swords
+- [62](https://cdn.hippogrief.nl/riderwaitesmith/62.jpg) : Queen of Swords
+- [63](https://cdn.hippogrief.nl/riderwaitesmith/63.jpg) : King of Swords
+- [64](https://cdn.hippogrief.nl/riderwaitesmith/64.jpg) : Ace of Wands
+- [65](https://cdn.hippogrief.nl/riderwaitesmith/65.jpg) : 2 of Wands
+- [66](https://cdn.hippogrief.nl/riderwaitesmith/66.jpg) : 3 of Wands
+- [67](https://cdn.hippogrief.nl/riderwaitesmith/67.jpg) : 4 of Wands
+- [68](https://cdn.hippogrief.nl/riderwaitesmith/68.jpg) : 5 of Wands
+- [69](https://cdn.hippogrief.nl/riderwaitesmith/69.jpg) : 6 of Wands
+- [70](https://cdn.hippogrief.nl/riderwaitesmith/70.jpg) : 7 of Wands
+- [71](https://cdn.hippogrief.nl/riderwaitesmith/71.jpg) : 8 of Wands
+- [72](https://cdn.hippogrief.nl/riderwaitesmith/72.jpg) : 9 of Wands
+- [73](https://cdn.hippogrief.nl/riderwaitesmith/73.jpg) : 10 of Wands
+- [74](https://cdn.hippogrief.nl/riderwaitesmith/74.jpg) : Page of Wands
+- [75](https://cdn.hippogrief.nl/riderwaitesmith/75.jpg) : Knight of Wands
+- [76](https://cdn.hippogrief.nl/riderwaitesmith/76.jpg) : Queen of Wands
+- [77](https://cdn.hippogrief.nl/riderwaitesmith/77.jpg) : King of Wands
