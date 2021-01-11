@@ -6,6 +6,8 @@ import discord
 import logging
 import random
 from env import TOKEN,CHANNEL_ROLL,CHANNEL_TAROT,TAROT_USERS,BASEURL,EXT
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # setup discord.py
 client = discord.Client()
@@ -16,6 +18,10 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='oracle.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
+# setup gspread
+scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('secret.json', scope)
+gclient = gspread.authorize(creds)
 
 def roll_dice(notation):
     roll = dice.roll(notation)
@@ -41,6 +47,13 @@ def random_tarot(exclude):
         elif exclude:
             random_card = str(random.choice([i for i in (range(00, 77, 1)) if not i in exclude]))
             return (BASEURL + random_card.zfill(2) + EXT)
+
+def get_question(language):
+    file = gclient.open_by_key("1mI_WJAUjUwVQPHn3VqWtgofKn1CNStyPY88dUnZMbYo")
+    rowcount = file.worksheet(language).row_count
+    random_question = random.randint(1, rowcount)
+    vraag = file.worksheet(language).row_values(random_question)[0]
+    return vraag
  
 def help_text():
     file = open('usage.md', 'r')
@@ -79,6 +92,16 @@ async def on_message(message):
         else:
             msg = format('You do not have the Sight')
             await message.author.send (msg)
+    if message.content.startswith('!vraag'):
+        language = 'NL'
+        question = get_question(language)
+        msg = 'Vraag voor {0.author.mention}: `%s`'.format(message) % (question)
+        await message.channel.send(msg)
+    if message.content.startswith('!question'):
+        language = 'EN'
+        question = get_question(language)
+        msg = 'Question for {0.author.mention}: `%s`'.format(message) % (question)
+        await message.channel.send(msg)
          
 @client.event
 async def on_ready():
