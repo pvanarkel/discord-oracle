@@ -88,18 +88,21 @@ def get_random_fortune(random_id):
     print("", fortune, lucky_number, random_id)
     make_fortunecard("", fortune, lucky_number, random_id)
 
-def get_specific_fortune(name, random_id):
+def get_specific_fortune(name):
     file = gclient.open_by_key("1obEF_tqJKyZ4uzm0sjQutih-Rq0JjGeBhhhf8LnTZsw")
     worksheet = file.worksheet('specific').get_all_values()
-    name = str.capitalize(name)
     for sublist in worksheet:
         if sublist[0] == name:
             (name,fortune,number) = (sublist[0],sublist[1],sublist[2])
             make_fortunecard(name, fortune, number)
-        else:
-            lucky_number = str(random.randint(1,99))
-            make_fortunecard("", fortune, lucky_number, random_id)
-            
+
+def check_specific_name(name):
+    file = gclient.open_by_key("1obEF_tqJKyZ4uzm0sjQutih-Rq0JjGeBhhhf8LnTZsw")
+    worksheet = file.worksheet('specific').get_all_values()
+    for sublist in worksheet:
+        if sublist[0] == name:
+            return True
+           
 def help_text():
     file = open('usage.md', 'r')
     contents = file.read()
@@ -153,24 +156,31 @@ async def on_message(message):
         parameters = message.content.split(' ', 1)
         if len(parameters) == 2:
             personal_fortune = parameters[1]
-            random_id = str(random.randint(100,255))
             if personal_fortune is None:
                 msg = 'Madame Mysteriosa is pondering your future. Check your pockets'
                 await message.channel.send(msg)
+                random_id = str(random.randint(100,255))
                 get_random_fortune(random_id)
                 image_url = 'files/fortune_' + random_id + '.jpg'
                 await message.author.send(file=discord.File(image_url))
             elif personal_fortune is not None:
-                name = str.lower(personal_fortune)
+                name = str.capitalize(personal_fortune)
+                random_id = str(random.randint(100,255))
+                exists = check_specific_name(name)
                 msg = 'Concentrate on your name while Madame Mysteriosa ponders your future. Check your pockets'
                 await message.channel.send(msg)
-                get_specific_fortune(name, random_id)
-                cap_name = str.capitalize(name)
-                image_url = 'files/fortune_' + cap_name + '.jpg'
-                await message.author.send(file=discord.File(image_url))
+                if exists:
+                    get_specific_fortune(name)
+                    image_url = 'files/fortune_' + name + '.jpg'
+                    await message.author.send(file=discord.File(image_url))
+                elif not exists:
+                    get_random_fortune(random_id)
+                    image_url = 'files/fortune_' + random_id + '.jpg'
+                    await message.author.send(file=discord.File(image_url))
         elif len(parameters) == 1:
             msg = 'Madame Mysteriosa is pondering your future. Check your pockets'
             await message.channel.send(msg)
+            random_id = str(random.randint(100,255))
             get_random_fortune(random_id)
             image_url = 'files/fortune_' + random_id + '.jpg'
             await message.author.send(file=discord.File(image_url))
