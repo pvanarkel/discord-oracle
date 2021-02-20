@@ -8,6 +8,8 @@ import random
 from env import TOKEN,CHANNEL_ROLL,CHANNEL_TAROT,TAROT_USERS,BASEURL,EXT
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from PIL import Image, ImageFont, ImageDraw
+import textwrap
 
 # setup discord.py
 client = discord.Client()
@@ -54,7 +56,47 @@ def get_question(language):
     random_question = random.randint(1, rowcount)
     vraag = file.worksheet(language).row_values(random_question)[0]
     return vraag
- 
+
+def make_fortunecard(name, text, number, random_id=''):
+    image = Image.open('files/fortune_blank.jpg')
+    font_name = ImageFont.truetype("files/Ramaraja-Regular.ttf", 110)
+    font_message = ImageFont.truetype("files/Ramaraja-Regular.ttf", 47)
+    font_number1 = ImageFont.truetype("files/Ramaraja-Regular.ttf", 45)
+    font_number2 = ImageFont.truetype("files/Ramaraja-Regular.ttf", 75)
+    draw = ImageDraw.Draw(image)
+    wrapper = textwrap.TextWrapper(width=25)
+    word_list = wrapper.wrap(text=text)
+    text_new = ''
+    for ii in word_list[:-1]:
+        text_new = text_new + ii + '\n'
+    text_new += word_list[-1]
+    draw.text((497.5, 200), name, (251, 234, 204), font=font_name, align='center', anchor='mm')
+    draw.text((497.5, 725), text_new, (0, 0, 0), font=font_message, align='center', anchor='mm')
+    draw.text((497.5, 1180), 'Your lucky number is', (251, 234, 204), font=font_number1, align='center', anchor='mm')
+    draw.text((497.5, 1250), number, (251, 234, 204), font=font_number2, align='center', anchor='mm')
+    if name:
+        image.save('files/fortune_' + name + '.jpg')
+    elif not name:
+        image.save('files/fortune_' + random_id + '.jpg')
+
+def get_random_fortune(random_id):
+    file = gclient.open_by_key("1obEF_tqJKyZ4uzm0sjQutih-Rq0JjGeBhhhf8LnTZsw")
+    rowcount = file.worksheet('general').row_count
+    random_fortune = random.randint(1, rowcount)
+    fortune = file.worksheet('general').row_values(random_fortune)[0]
+    lucky_number = str(random.randint(1,99))
+    print("", fortune, lucky_number, random_id)
+    make_fortunecard("", fortune, lucky_number, random_id)
+
+def get_specific_fortune(name):
+    file = gclient.open_by_key("1obEF_tqJKyZ4uzm0sjQutih-Rq0JjGeBhhhf8LnTZsw")
+    worksheet = file.worksheet('specific').get_all_values()
+    name = str.capitalize(name)
+    for sublist in worksheet:
+        if sublist[0] == name:
+            (name,fortune,number) = (sublist[0],sublist[1],sublist[2])
+            make_fortunecard(name, fortune, number)
+            
 def help_text():
     file = open('usage.md', 'r')
     contents = file.read()
@@ -69,15 +111,16 @@ async def on_message(message):
         msg = format(help_text())
         await message.author.send (msg)
     if message.content.startswith('!roll'):
-        channel = client.get_channel(int(CHANNEL_ROLL))
+        # channel = client.get_channel(int(CHANNEL_ROLL)) # uncomment for dice-channel
         parameters = message.content.split(' ', 1)
         if len(parameters) == 2:
             param = parameters[1]
             roll,result = roll_dice(param)
             msg = 'Rolling %s for {0.author.mention}: `%s`'.format(message) % (param,roll)
-            await channel.send (msg)
+            # await channel.send (msg) #uncomment for dice-channel
+            await message.channel.send(msg)
     if message.content.startswith('!tarot'):
-        channel = client.get_channel(int(CHANNEL_TAROT))
+        # channel = client.get_channel(int(CHANNEL_TAROT)) # uncomment for tarot-channel
         parameters = message.content.split(' ', 1)
         del parameters[0]
         allowed_users = TAROT_USERS
@@ -88,7 +131,8 @@ async def on_message(message):
                 exclude = parameters[0]
             image_url = random_tarot(exclude)
             embed = e.set_image(url=image_url)
-            await channel.send (embed=embed)
+            # await channel.send (embed=embed) # uncomment for tarot-channel
+            await message.channel.send(embed=embed)
         else:
             msg = format('You do not have the Sight')
             await message.author.send (msg)
@@ -102,6 +146,31 @@ async def on_message(message):
         question = get_question(language)
         msg = 'Question for {0.author.mention}: `%s`'.format(message) % (question)
         await message.channel.send(msg)
+    if message.content.startswith('!fortune'):
+        parameters = message.content.split(' ', 1)
+        if len(parameters) == 2:
+            personal_fortune = parameters[1]
+            if personal_fortune is None:
+                msg = 'Madame Mysteriosa is pondering your future. Check your pockets'
+                await message.channel.send(msg)
+                random_id = str(random.randint(100,255))
+                get_random_fortune(random_id)
+                image_url = 'files/fortune_' + random_id + '.jpg'
+                await message.author.send(file=discord.File(image_url))
+            elif personal_fortune is not None:
+                name = str.lower(personal_fortune)
+                msg = 'Concentrate on your name while Madame Mysteriosa ponders your future. Check your pockets'
+                await message.channel.send(msg)
+                get_specific_fortune(name)
+                image_url = 'files/fortune_' + name + '.jpg'
+                await message.author.send(file=discord.File(image_url))
+        elif len(parameters) == 1:
+            msg = 'Madame Mysteriosa is pondering your future. Check your pockets'
+            await message.channel.send(msg)
+            random_id = str(random.randint(100,255))
+            get_random_fortune(random_id)
+            image_url = 'files/fortune_' + random_id + '.jpg'
+            await message.author.send(file=discord.File(image_url))
          
 @client.event
 async def on_ready():

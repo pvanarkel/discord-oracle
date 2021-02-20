@@ -63,6 +63,5 @@ Will get a random card from the list, but will exclude the number N.
 (example: `!tarot -4,-6,-56`) <br>
 Will get a random card from the list, but will exclude the commaspaced numbers. (no spaces between commaspaced values, otherwise the results could be unpredictable, recorded as discord-oracle#1)
 
-
 # notes
 In the tarot command, it's possible to define excludes and specific numbers, like `!tarot 21,-5`, but since the bot only outputs one card at a time, they excludes will not do anything. This behaviour might change when the bot is changed to be able to output more cards simultaneously.
